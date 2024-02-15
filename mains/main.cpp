@@ -42,7 +42,7 @@ public:
     }
     void displayInfo()
     {
-        cout << this->id << " : " << endl;
+        cout << this->id << endl;
         cout << "Qualifications : ";
         for (int i = 0; i < this->types.size(); i++)
             cout << this->types[i] << " ";
@@ -51,11 +51,10 @@ public:
             cout << "No problems solved yet" << endl;
         else
         {
-            cout << "Problem solved : " << endl;
+            cout << "Problems solved : " << endl;
             for (int i = 0; i < this->assignedProblems.size(); i++)
                 this->assignedProblems[i].displayInfo();
         }
-        cout << endl;
     }
     bool isAvailable(Problem p)
     {
@@ -114,17 +113,29 @@ void init()
 
 void displayData()
 {
-    while (!problems.empty())
+    cout << "Problems : " << endl;
+    if (problems.empty())
     {
-        Problem p = problems.top();
-        p.displayInfo();
-        problems.pop();
+        cout << "No more problems left" << endl;
+    }
+    else
+    {
+        while (!problems.empty())
+        {
+            Problem p = problems.top();
+            p.displayInfo();
+            problems.pop();
+            cout << "----" << endl;
+        }
     }
 
     cout << endl;
-
+    cout << "Doctors : " << endl;
     for (int i = 0; i < doctors.size(); i++)
+    {
         doctors[i].displayInfo();
+        cout << "----" << endl;
+    }
 }
 
 void solve()
@@ -145,17 +156,12 @@ void solve()
 
         problems.pop();
     }
-    cout << endl;
-    for (int i = 0; i < doctors.size(); i++)
-    {
-        doctors[i].displayInfo();
-        cout << endl;
-    }
 }
 
 int main()
 {
     init();
     solve();
+    displayData();
     return 0;
 }
